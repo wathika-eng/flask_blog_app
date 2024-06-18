@@ -17,9 +17,14 @@ class RegistrationForm(FlaskForm):
         validators=[DataRequired(), EqualTo("password")],
     )
     submit = SubmitField("Sign Up")
-
-    def custom_validator(self, email):
+    
+    def custom_email_validator(self, email):
         user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError("Email already exists")
+
+    def custom_username_validator(self, username):
+        user = User.query.filter_by(email=username.data).first()
         if user:
             raise ValidationError("Username already exists")
 
