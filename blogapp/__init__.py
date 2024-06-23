@@ -7,6 +7,9 @@ from flask_login import LoginManager
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)  # allow db to handle sessions
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'danger'
+
 # posts = [{"author": "kamaa", "year": "2002"}, {"author": "jane", "year": "2012"}]
 # posts = [{}]
 app.config["SECRET_KEY"] = "fac58fa2c3413763fbb7"
